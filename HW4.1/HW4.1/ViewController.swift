@@ -21,8 +21,9 @@ class ViewController: UIViewController {
         //Task 3
 //        divideMergedName("IvanVasilevich")
         //Task 4
-        mirrorWord("Ось")
-        
+//        mirrorWord("Ось", printAnswer: true)
+        //Task 5
+        insertComasToNumber(1234567890123456789)
         
     }
     //    Задача 1. Создать строку с своим именем, вывести количество символов содержащихся в ней.
@@ -70,17 +71,36 @@ class ViewController: UIViewController {
     }
 
     //    Задача 4. Вывести строку зеркально Ось → ьсО не используя reverse (посимвольно)
-    func mirrorWord(_ word: String) {
-        //version 1
-        let mirroredWord = String(word.sorted(by: {$0 > $1} ))
-        print("Reversed word \(word) is \(mirroredWord)")
-        //version 2
+    func mirrorWord(_ word: String, printAnswer: Bool) -> String{
         var mirroredWordSymbolBySymbol = ""
         for i in word {
             mirroredWordSymbolBySymbol.insert(i, at: mirroredWordSymbolBySymbol.startIndex)
         }
-        print("Reversed word \(word) is \(mirroredWordSymbolBySymbol)")
+        if printAnswer {
+            print("Reversed word \(word) is \(mirroredWordSymbolBySymbol)")
+        }
+        return mirroredWordSymbolBySymbol
+        
     }
-   
+    
+    //    Задача 5. Добавить запятые в строку как их расставляет калькулятор
+    //    1234567 → 1,234,567
+    //    12345 → 12,345
+    //    (не использовать встроенный метод для применения формата)
+    func insertComasToNumber(_ num: Int) {
+        let mirroredString = mirrorWord(String(num), printAnswer: false)
+        var numWithComas = ""
+        var counter: Int = 1
+        for character in mirroredString {
+            numWithComas.insert(character, at: numWithComas.endIndex)
+            if counter % 3 == 0 {
+                numWithComas.insert(",", at: numWithComas.endIndex)
+            }
+            counter += 1
+        }
+        print("\(num) → \(mirrorWord(numWithComas, printAnswer: false))")
+    }
+    
+    
 }
 
