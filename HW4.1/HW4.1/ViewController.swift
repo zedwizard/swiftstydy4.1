@@ -19,8 +19,9 @@ class ViewController: UIViewController {
         //Task 2
 //        checkSurnameSuffix("Vasilevich")
         //Task 3
-        divideMergedName("IvanVasilevich")
-
+//        divideMergedName("IvanVasilevich")
+        //Task 4
+        mirrorWord("Ось")
         
         
     }
@@ -68,6 +69,18 @@ class ViewController: UIViewController {
         print("\(name)\n\(surname)\n\(name) \(surname)")
     }
 
+    //    Задача 4. Вывести строку зеркально Ось → ьсО не используя reverse (посимвольно)
+    func mirrorWord(_ word: String) {
+        //version 1
+        let mirroredWord = String(word.sorted(by: {$0 > $1} ))
+        print("Reversed word \(word) is \(mirroredWord)")
+        //version 2
+        var mirroredWordSymbolBySymbol = ""
+        for i in word {
+            mirroredWordSymbolBySymbol.insert(i, at: mirroredWordSymbolBySymbol.startIndex)
+        }
+        print("Reversed word \(word) is \(mirroredWordSymbolBySymbol)")
+    }
    
 }
 
