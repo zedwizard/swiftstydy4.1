@@ -23,7 +23,9 @@ class ViewController: UIViewController {
         //Task 4
 //        mirrorWord("Ось", printAnswer: true)
         //Task 5
-        insertComasToNumber(1234567890123456789)
+//        insertComasToNumber(1234567890123456789)
+        //Task 6
+        checkPasswordStrength("32556reWDr&")
         
     }
     //    Задача 1. Создать строку с своим именем, вывести количество символов содержащихся в ней.
@@ -101,6 +103,61 @@ class ViewController: UIViewController {
         print("\(num) → \(mirrorWord(numWithComas, printAnswer: false))")
     }
     
+    //    Задача 6. Проверить пароль на надежность от 1 до 5
+    //    a) если пароль содержит числа +1
+    //    b) символы верхнего регистра +1
+    //    c) символы нижнего регистра +1
+    //    d) спец символы +1
+    //    e) если содержит все вышесказанное
+    //    Пример:
+    //    123456 - 1 a)
+    //    qwertyui - 1 c)
+    //    12345qwerty - 2 a) c)
+    //    32556reWDr - 3 a) b) c)
+    func checkPasswordStrength (_ password: String) {
+        var containArray: [Bool] = [false, false, false, false, false]
+        var strengthLevel = 0
+        var typeOfSymbols = ""
+        for character in password {
+            if character.isNumber && containArray[0] == false {
+                containArray[0] = true //contain numbers
+            }
+            if character.isUppercase && containArray[1] == false {
+                containArray[1] = true // contain uppercase letter
+            }
+            if character.isLowercase && containArray[2] == false {
+                containArray[2] = true // contain lowercase letter
+            }
+            if (character.isLetter || containArray[3]) == false {
+                containArray[3] = true // contain special symbol
+            }
+        }
+        if containArray[0] && containArray[1] && containArray[2] && containArray[3] == true {
+            containArray[4] = true // contain all kind of symbols
+        }
+        for i in 0..<containArray.count {
+            if containArray[i] == true {
+                strengthLevel += 1
+                switch
+                    i {
+                case 0:
+                    typeOfSymbols.append(" a)")
+                case 1:
+                    typeOfSymbols.append(" b)")
+                case 2:
+                    typeOfSymbols.append(" c)")
+                case 3:
+                    typeOfSymbols.append(" d)")
+                case 4:
+                    typeOfSymbols.append(" e)")
+                default:
+                    return
+                }
+            }
+            //\u{24}
+        }
+        print("\(password) - \(strengthLevel)\(typeOfSymbols)")
+    }
     
 }
 
