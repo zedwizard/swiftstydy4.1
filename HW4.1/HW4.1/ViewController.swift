@@ -116,24 +116,24 @@ class ViewController: UIViewController {
     //    32556reWDr - 3 a) b) c)
     func checkPasswordStrength (_ password: String) {
         var containArray: [Bool] = [false, false, false, false, false]
-        var strengthLevel = 0
+        var strengthLevel: Int = 0
         var typeOfSymbols = ""
         for character in password {
             if character.isNumber && containArray[0] == false {
-                containArray[0] = true //contain numbers
+                containArray[0] = true // contain number
             }
             if character.isUppercase && containArray[1] == false {
                 containArray[1] = true // contain uppercase letter
             }
             if character.isLowercase && containArray[2] == false {
-                containArray[2] = true // contain lowercase letter
+                containArray[2] = true //contain lowercase letter
             }
-            if (character.isLetter || containArray[3]) == false {
+            if (character.isLetter || character.isNumber) && containArray[3] == false {
                 containArray[3] = true // contain special symbol
             }
         }
         if containArray[0] && containArray[1] && containArray[2] && containArray[3] == true {
-            containArray[4] = true // contain all kind of symbols
+            containArray[4] = true //contain all kind of symbols
         }
         for i in 0..<containArray.count {
             if containArray[i] == true {
@@ -159,5 +159,20 @@ class ViewController: UIViewController {
         print("\(password) - \(strengthLevel)\(typeOfSymbols)")
     }
     
+    //    II. Прочесть главу "Collection Types" - swift book.ru
+    //    Задача 7. Сортировка массива не встроенным методом по возрастанию + удалить дубликаты
+    //    [9, 1, 2, 5, 1, 7]
+    
+    //    Задача 8. Написать метод, который будет переводить строку в транслит.
+    //    Пример:
+    //    print(convertStrToTranslite:”ЯЗЗЬ”) → “YAZZ”
+    //    print(convertStrToTranslite:”морДа”) → “morDa”
+    
+    //    Задача 9. Сделать выборку из массива строк в которых содержится указанная строка
+    //    [“lada”, “sedan”, “baklazhan”] search “da”
+    //    → [“lada”, “sedan”] - sort() && sort using NSPredicate + manual (for loop)
+    
+    //    Задача 10. Set<String> - antimat [“fuck”, “fak”] “hello my fak” “hello my ***”
+    //    использовать Set или NSSet для программы antimat - исключить из предложения все слова содержащиеся в сете
 }
 
